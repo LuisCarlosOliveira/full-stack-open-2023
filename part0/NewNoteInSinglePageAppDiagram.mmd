@@ -1,0 +1,15 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note left of browser: User writes a note in the SPA's text field and clicks on 'submit'
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note_spa
+    Note right of browser: Browser sends the note data in JSON format via AJAX
+    activate server
+
+    Note over server: Server processes the data, saves the new note, and returns a success or the details of the new note
+    server-->>browser: Success response (e.g., status 200 OK or JSON of the new note)
+    deactivate server
+
+    Note right of browser: Embedded JavaScript in the browser processes the response and updates the UI, displaying the new note to the user without refreshing the page

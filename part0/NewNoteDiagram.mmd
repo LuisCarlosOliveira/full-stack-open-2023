@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    Note left of browser: User writes a note and clicks on "submit"
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of browser: Browser sends the note data in JSON format
+    activate server
+
+    Note over server: Server processes the data and saves the note
+    server-->>browser: Success response (e.g., status 200 OK)
+    deactivate server
+
+    Note right of browser: Upon receiving confirmation, the browser may refresh the page or add the new note to the list
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document updated with the new note
+    deactivate server
+
+    Note right of browser: The page is rendered with the new note visible to the user
